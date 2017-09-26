@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travel Dashboard</title>
+</head>
+<body>
+    <div>
+        <span>Hello {{user.name}}</span>
+        <span><a href="/logout">Logout</a></span>
+
+        <h3>Your Trips Schedules</h3>
+        <table>
+            <th>Destination</th>
+            <th>Tavel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            {% for trip in userTrips %}
+            <tr>
+                <td><a href="/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                <td>{{trip.date_from}}</td>
+                <td>{{trip.date_to}}</td>
+                <td>{{trip.description}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        <h3>Other User's Travel Plans</h3>
+        <table>
+            <th>Name</th>
+            <th>Desination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do you want to join?</th>
+            {% for other_trip in otherTrips %}
+            <tr>
+                <td>{{other_trip.primaryuser.name}}</td>
+                <td><a href="/destination/{{other_trip.id}}">{{other_trip.destination}}</a></td>
+                <td>{{other_trip.date_from}}</td>
+                <td>{{other_trip.date_to}}</td>
+                <td><a href="/join/{{other_trip.id}}">Join</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+        <a href="/travels/add">Add Travel Plan</a>
+        
+    </div>
+</body>
+</html>
